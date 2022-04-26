@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    
+    <title></title>
+    <link rel="stylesheet" href="mystyle.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    
+</head>
+<body>
+    
+<button id="but" onclick="updateChart22();">click</button>
+    
+<div id="holdersDiv">
+    <canvas id="holders"></canvas>
+</div>
+<div id="transfersDiv">
+    <canvas id="transfers"></canvas>
+</div>
+<div id="volumeDiv">
+    <canvas id="volume"></canvas>
+</div>
+<div id="mcDiv">
+    <canvas id="mc"></canvas>
+</div>
+<div id="priceDiv">
+    <canvas id="price"></canvas>
+</div>
+
+<script>
+    
+    const ctx = document.getElementById("holders");
+    const ctx1 = document.getElementById("transfers");
+    const ctx2 = document.getElementById("volume");
+    const ctx3 = document.getElementById("mc");
+    const ctx4 = document.getElementById("price");
+    
+    let labelMain = [25-4-2022 16:00];//*T*
+    let label0 = [...labelMain];
+    let dataHolders = [7867];//*H*
+    let data0 = [...dataHolders];
+    let label1 = [...labelMain];
+    let dataTransfers = [29321];//*Tr*
+    let data1 = [...dataTransfers];
+    let label2 = [...labelMain];
+    let dataVolume = [230493];//*V*
+    let data2 = [...dataVolume];
+    let label3 = [...labelMain];
+    let dataMc = [10283565];//*M*
+    let data3 = [...dataMc];
+    let label4 = [...labelMain];
+    let dataPrice = [0.258392];//*P*
+    let data4 = [...dataPrice];
+    
+    var fileName = ["holders.txt", "transfers.txt", "volume.txt", "mc.txt", "price.txt"];
+
+
+    for (var i = 0; i < 5; i++) {
+    
+        let request = new XMLHttpRequest();
+        request.open("GET", fileName[i]);
+        request.onreadystatechange = function() {
+            if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+                //var data = JSON.parse(request.responseText);
+                console.log(request.responseText);
+            }
+        }
+        request.send();
+    }
+    
+    function updateChart22() {
+        label22.push('3');
+        data22.push(4);
+        console.log(label22);
+        lineChart.update();
+    }
+    
+    var lineChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: label0,
+    datasets: [
+      {
+        label: "Holders",
+        data: data0,
+        borderColor: "#1673ff"
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero:true
+            }
+        }]
+    }
+}
+});
+    
+    var lineChart1 = new Chart(ctx1, {
+  type: 'line',
+  data: {
+    labels: label1,
+    datasets: [
+      {
+        label: "Transfers",
+        data: data1,
+        borderColor: "#1673ff"
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero:true
+            }
+        }]
+    }
+}
+});
+    
+    var lineChart2 = new Chart(ctx2, {
+  type: 'line',
+  data: {
+    labels: label2,
+    datasets: [
+      {
+        label: "Volume",
+        data: data2,
+        borderColor: "#1673ff"
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero:true
+            }
+        }]
+    }
+}
+});
+    
+    var lineChart3 = new Chart(ctx3, {
+  type: 'line',
+  data: {
+    labels: label3,
+    datasets: [
+      {
+        label: "Market Cap",
+        data: data3,
+        borderColor: "#1673ff"
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero:true
+            }
+        }]
+    }
+}
+});
+    
+    var lineChart4 = new Chart(ctx4, {
+  type: 'line',
+  data: {
+    labels: label4,
+    datasets: [
+      {
+        label: "Price",
+        data: data4,
+        borderColor: "#1673ff"
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero:true
+            }
+        }]
+    }
+}
+});
+    
+</script>
+</body>
+</html>

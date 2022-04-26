@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    
+    <title></title>
+    <link rel="stylesheet" href="mystyle.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    
+</head>
+<body>
+    
+<div id="holdersDiv">
+    <canvas id="holders"></canvas>
+    <button onclick="updateHolders();">Get stats</button>
+    <input type="text" id="holdersInput" placeholder="Enter timeframe in days">
+</div>
+<div id="transfersDiv">
+    <canvas id="transfers"></canvas>
+    <button onclick="updateTransfers();">Get stats</button>
+    <input type="text" id="transfersInput" placeholder="Enter timeframe in days">
+</div>
+<div id="volumeDiv">
+    <canvas id="volume"></canvas>
+    <button onclick="updateVolume();">Get stats</button>
+    <input type="text" id="volumeInput" placeholder="Enter timeframe in days">
+</div>
+<div id="mcDiv">
+    <canvas id="mc"></canvas>
+    <button onclick="updateMc();">Get stats</button>
+    <input type="text" id="mcInput" placeholder="Enter timeframe in days">
+</div>
+<div id="priceDiv">
+    <canvas id="price"></canvas>
+    <button onclick="updatePrice();">Get stats</button>
+    <input type="text" id="priceInput" placeholder="Enter timeframe in days">
+</div>
+
+<script>
+  
+    const ctx = document.getElementById("holders");
+    const ctx1 = document.getElementById("transfers");
+    const ctx2 = document.getElementById("volume");
+    const ctx3 = document.getElementById("mc");
+    const ctx4 = document.getElementById("price");
+    
+    const labelMain = ["25-4-2022 16:00", "25-4-2022 18:00", "25-4-2022 18:00"];//*T*
+    let label0 = [...labelMain];
+    const dataHolders = [7867, 7867, 7867];//*H*
+    let data0 = [...dataHolders];
+    let label1 = [...labelMain];
+    const dataTransfers = [29321, 7867, 7867];//*Tr*
+    let data1 = [...dataTransfers];
+    let label2 = [...labelMain];
+    const dataVolume = [230493, 184505, 183774];//*V*
+    let data2 = [...dataVolume];
+    let label3 = [...labelMain];
+    const dataMc = [10283565, 10480141, 10480141];//*M*
+    let data3 = [...dataMc];
+    let label4 = [...labelMain];
+    const dataPrice = [0.258392, 0.263224, 0.262995];//*P*
+    let data4 = [...dataPrice];
+    
+    //var fileName = ["holders.txt", "transfers.txt", "volume.txt", "mc.txt", "price.txt"];
+    
+    
+    function updateHolders() {
+    
+      const inputVal = document.getElementById("holdersInput").value;
+      
+      if (!isNaN(inputVal) && parseInt(Number(inputVal)) == inputVal) {
+        if (inputVal > 0) {
+          if (labelMain.length > (inputVal * 24) && data0.length > (inputVal * 24)) {
+              
+              holdersChart.data.labels = labelMain.slice(labelMain.length - (inputVal * 24), labelMain.length);
+              holdersChart.data.datasets[0].data = dataHolders.slice(dataHolders.length - (inputVal * 24), dataHolders.length);
+              
+          } else {
+            
+            holdersChart.data.labels = labelMain;
+            holdersChart.data.datasets[0].data = dataHolders;
+          }
+          
+          holdersChart.update();
+        }
+      }
+    }
+  
+  function updateTransfers() {
+    
+      const inputVal = document.getElementById("transfersInput").value;
+      
+      if (!isNaN(inputVal) && parseInt(Number(inputVal)) == inputVal) {
+        if (inputVal > 0) {
+          if (labelMain.length > (inputVal * 24) && data1.length > (inputVal * 24)) {
+              
+              transfersChart.data.labels = labelMain.slice(labelMain.length - (inputVal * 24), labelMain.length);
+              transfersChart.data.datasets[0].data = dataTransfers.slice(dataTransfers.length - (inputVal * 24), dataTransfers.length);
+              
+          } else {
+            
+            transfersChart.data.labels = labelMain;
+            transfersChart.data.datasets[0].data = dataTransfers;
+            
+          }
+          
+          transfersChart.update();
+        }
+      }
+  }
+  
+  function updateVolume() {
+    
+      const inputVal = document.getElementById("volumeInput").value;
+      
+      if (!isNaN(inputVal) && parseInt(Number(inputVal)) == inputVal) {
+        if (inputVal > 0) {
+          if (labelMain.length > (inputVal * 24) && data2.length > (inputVal * 24)) {
+              
+              volumeChart.data.labels = labelMain.slice(labelMain.length - (inputVal * 24), labelMain.length);
+              volumeChart.data.datasets[0].data = dataVolume.slice(dataVolume.length - (inputVal * 24), dataVolume.length);
+              
+          } else {
+            
+            volumeChart.data.labels = labelMain;
+            volumeChart.data.datasets[0].data = dataVolume;
+            
+          }
+          
+          volumeChart.update();
+        }
+      }
+  }
+  
+  function updateMc() {
+    
+      const inputVal = document.getElementById("mcInput").value;
+      
+      if (!isNaN(inputVal) && parseInt(Number(inputVal)) == inputVal) {
+        if (inputVal > 0) {
+          if (labelMain.length > (inputVal * 24) && data3.length > (inputVal * 24)) {
+              
+              mcChart.data.labels = labelMain.slice(labelMain.length - (inputVal * 24), labelMain.length);
+              mcChart.data.datasets[0].data = dataMc.slice(dataMc.length - (inputVal * 24), dataMc.length);
+              
+          } else {
+            
+            mcChart.data.labels = labelMain;
+            mcChart.data.datasets[0].data = dataMc;
+            
+          }
+          
+          mcChart.update();
+        }
+      }
+  }
+  
+  function updatePrice() {
+    
+      const inputVal = document.getElementById("priceInput").value;
+      
+      if (!isNaN(inputVal) && parseInt(Number(inputVal)) == inputVal) {
+        if (inputVal > 0) {
+          if (labelMain.length > (inputVal * 24) && data4.length > (inputVal * 24)) {
+              
+              priceChart.data.labels = labelMain.slice(labelMain.length - (inputVal * 24), labelMain.length);
+              priceChart.data.datasets[0].data = dataPrice.slice(dataPrice.length - (inputVal * 24), dataPrice.length);
+              
+          } else {
+            
+            priceChart.data.labels = labelMain;
+            priceChart.data.datasets[0].data = dataPrice;
+            
+          }
+          
+          priceChart.update();
+        }
+      }
+  }
+    
+
+/*
+    for (var i = 0; i < 5; i++) {
+    
+        let request = new XMLHttpRequest();
+        request.open("GET", fileName[i]);
+        request.onreadystatechange = function() {
+          
+          if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+              //var data = JSON.parse(request.responseText);
+              console.log(request.responseText);
+          }
+        }
+        
+        request.send();
+    }*/
+    
+    let holdersChart = new Chart(ctx, {
+      
+      type: 'line',
+      data: {
+        labels: label0,
+        datasets: [
+          {
+            label: "Holders",
+            data: data0,
+            borderColor: "#1673ff"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+    
+    let transfersChart = new Chart(ctx1, {
+      
+      type: 'line',
+      data: {
+        labels: label1,
+        datasets: [
+          {
+            label: "Transfers",
+            data: data1,
+            borderColor: "#1673ff"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+    
+    let volumeChart = new Chart(ctx2, {
+      
+      type: 'line',
+      data: {
+        labels: label2,
+        datasets: [
+          {
+            label: "Volume",
+            data: data2,
+            borderColor: "#1673ff"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+    
+    let mcChart = new Chart(ctx3, {
+      
+      type: 'line',
+      data: {
+        labels: label3,
+        datasets: [
+          {
+            label: "Market Cap",
+            data: data3,
+            borderColor: "#1673ff"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+    
+    let priceChart = new Chart(ctx4, {
+      
+      type: 'line',
+      data: {
+        labels: label4,
+        datasets: [
+          {
+            label: "Price",
+            data: data4,
+            borderColor: "#1673ff"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+    
+</script>
+</body>
+</html>
